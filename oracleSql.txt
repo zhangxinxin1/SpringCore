@@ -1,0 +1,17 @@
+在  oracle 中：
+
+
+oracle官网给出了subquery的分类：
+
+A subquery in the FROM clause of a SELECT statement is also called an inline view. A subquery in the WHERE clause of a SELECT statement is also called a nested subquery.
+在From 语句中出现的子查询被称为 inline view（内联视图），在where 语句中出现的子查询被称为nested subquery(嵌套子查询)。
+
+经测试证明在嵌套子查询中不允许出现order by 语句。例如：
+select * from scott.emp
+where ename in (select ename from scott.emp order by ename)
+会报 “ORA-00907:缺少右括号”的错误。
+
+如果将上面的嵌套子查询再包装一层，成为第二层查询的内联视图。
+select * from scott.emp
+where ename in (select * from(select ename from scott.emp order by ename))
+则可以成功执行。
