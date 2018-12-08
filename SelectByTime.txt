@@ -1,0 +1,14 @@
+ public String selectAlreadyExamPaper(Map<String, Object> parameter) {
+    	Date beginTime = (Date)parameter.get("beginTime");
+    	Date endTime = (Date)parameter.get("endTime");
+    	String examId = (String)parameter.get("examId");
+    	String begin = DateUtils.format(beginTime);
+    	String end = DateUtils.format(endTime);
+        SQL sql = new SQL();
+        sql.SELECT("EXAM_PAPER_NAME");
+        sql.FROM("CLERK_EXAM_PAPER");
+        sql.AND();
+        sql.WHERE(" exam_id ='"+examId+"' AND   TO_DATE('"+begin+"', 'yyyy-MM-dd HH24:mi:ss')  between  begin_time  and  end_time ) OR  ( exam_id ='"+examId+"' AND   TO_DATE('"+end+"', 'yyyy-MM-dd HH24:mi:ss')  between  begin_time  and  end_time");
+        return sql.toString();
+       }
+    	
