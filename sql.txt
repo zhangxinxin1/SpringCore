@@ -12,7 +12,8 @@
 
 
 
-select * from     customer_drug_order   o where ( (exist   select * from  drug_store  where id=o.drug_store_id and   drug_store_hq_id ='85a6bb3194fe4c14b3015ce958746edd'))
+select * from     customer_drug_order   o where ( (exist   select * from  drug_store 
+where id=o.drug_store_id and   drug_store_hq_id ='85a6bb3194fe4c14b3015ce958746edd'))
 
 
 85a6bb3194fe4c14b3015ce958746edd
