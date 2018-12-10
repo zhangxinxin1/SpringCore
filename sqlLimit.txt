@@ -1,0 +1,10 @@
+SELECT  * ,ROWNUM rn FROM   CLERK_SPEAK_LOG    ORA-00923: 未找到要求的 FROM 关键字
+
+
+
+
+SELECT * FROM    ( SELECT  t.* ,ROWNUM rn FROM   CLERK_SPEAK_LOG  t)   s  WHERE s.rn>2 and s.rn<=3;    
+
+
+
+SELECT * FROM    ( SELECT  t.* ,ROWNUM rn FROM   CLERK_SPEAK_LOG  t )     WHERE rn>2 and rn<=3;   
