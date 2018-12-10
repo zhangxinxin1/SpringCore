@@ -1,10 +1,13 @@
-������ͨ��Ƕ���Ӳ�ѯ��˵����ִ���Ӳ�ѯ��Ȼ��ִ�н�����ظ��ⲿ��ѯ
+对于普通的嵌套子查询来说，先执行子查询，然后将执行结果返回给外部查询
 
-��������Ӳ�ѯ��˵����Ϊ�Ӳ�ѯ���漰���ⲿ��ѯ���У�����ͨ������ִ�� 
-�ⲿ��ѯ�����ⲿ��ѯ���д����Ӳ�ѯ���Ӳ�ѯִ�н����󣬷��ظ��ⲿ��ѯ 
-���¾���������̡� 
+对于相关子查询来说，因为子查询中涉及了外部查询的列，所以通常是先执行 
+外部查询，把外部查询的列传给子查询，子查询执行结束后，返回给外部查询 
+大致就是这个过程。 
 
-���⣬�������ķ������ǲ鿴ִ�мƻ�����Ϊ�п����漰�Ż������Ż�
+另外，最清晰的方法就是查看执行计划，因为有可能涉及优化器的优化
+
+
+ select p.* ,（select count(ID) FROM CLERK_EXAM_QUESTION  where EXAM_PAPER_ID=p.ID) as examcount   from CLERK_EXAM_PAPER  p; 
 
 
 
@@ -28,6 +31,9 @@ WHERE
 
 select * from T1 where exists(select 1 from T2 where T1.a=T2.a) ;
 
-    T1������С��T2�������ǳ���ʱ��T1<<T2 ʱ��1) �Ĳ�ѯЧ�ʸߡ�
+    T1数据量小而T2数据量非常大时，T1<<T2 时，1) 的查询效率高。
 
  select * from T1 where T1.a in (select T2.a from T2) ;
+ 
+ 
+ 
