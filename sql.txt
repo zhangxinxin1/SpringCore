@@ -7,7 +7,7 @@
 另外，最清晰的方法就是查看执行计划，因为有可能涉及优化器的优化
 
 
- select p.* ,（select count(ID) FROM CLERK_EXAM_QUESTION  where EXAM_PAPER_ID=p.ID) as examcount   from CLERK_EXAM_PAPER  p
+ select p.* ,（select count(ID) FROM CLERK_EXAM_QUESTION  where EXAM_PAPER_ID=p.ID) as examcount   from CLERK_EXAM_PAPER  p ;
 
 
 
