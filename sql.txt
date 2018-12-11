@@ -38,3 +38,21 @@ select * from T1 where exists(select 1 from T2 where T1.a=T2.a) ;
  
  
  
+ 
+ 
+ 
+ 
+ select rownum  rn, * from  (SELECT     *
+           
+            FROM QUESTION_CATEGORY c
+             ) a
+ missing expression   ->   select  a.*,rownum  rn from  (SELECT     *
+           
+            FROM QUESTION_CATEGORY c
+             ) a
+
+ 
+ 
+ 
+ 
+ 
