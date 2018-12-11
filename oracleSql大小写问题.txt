@@ -1,0 +1,8 @@
+ORACLE，小写的列，在
+
+使用时得加上双引号并小写才能使用
+
+select PROVINCE,sum("nu") from CHINA_CITY  group by   PROVINCE  "nu";
+
+select PROVINCE,sum(nu) from CHINA_CITY  group by   PROVINCE  nu;    "NU" 标识符无效
+
