@@ -18,4 +18,5 @@ where ename in (select * from(select ename from scott.emp order by ename))
 则可以成功执行。
 
 
+
 oracle建立字段 注意  数据类型  VARCHAR2和  CHAR   位数不足的数据 使用   VARCHAR2  ，有时出现 查询为空
