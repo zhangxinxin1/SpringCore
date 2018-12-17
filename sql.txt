@@ -53,6 +53,6 @@ select * from T1 where exists(select 1 from T2 where T1.a=T2.a) ;
 
  
  
- 
+ break 跳出  flag 标记全累加状态
  
  
