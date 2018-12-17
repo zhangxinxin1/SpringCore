@@ -12,8 +12,8 @@ object DataAnalysis {
 
   def main(args: Array[String]): Unit = {
 
-    var file = Source.fromFile("/home/weichuang/cs/gzPro/qoros_trip_trajectory_2postgis/newFile.txt")
-    val out = new PrintWriter("/home/weichuang/cs/gzPro/qoros_trip_trajectory_2postgis/res.txt")
+    var file = Source.fromFile("./newFile.txt")
+    val out = new PrintWriter("./res.txt")
     var idx = 0
     var idxMap = collection.mutable.Map[String, Int]()
 
