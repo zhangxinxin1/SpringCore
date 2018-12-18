@@ -5,7 +5,7 @@
 			"addTime": "2018-12-17 13:35:16",
 			"courseContent": null,
 			"courseId": "d6b476d4eb9045ca9fff9c818e2e1003",
-			"courseName": "�ڿ�ҩ���ڲ��Ƶ�1Ӧ��           ",
+			"courseName": "内科药物在产科的1应用           ",
 			"coursePoint": 1,
 			"id": "30a6d10c23a743529f63bae885617fdf",
 			"isExam": null,
@@ -21,7 +21,7 @@
 			"addTime": "2018-12-17 13:35:45",
 			"courseContent": null,
 			"courseId": "d6b476d4eb9045ca9fff9c818e2e1004",
-			"courseName": "�����ƿƿ�ҩ���ڲ��Ƶ�6Ӧ��     ",
+			"courseName": "妇产科科科药物在产科的6应用     ",
 			"coursePoint": 3,
 			"id": "597593d98a4d422daf5c296d02830064",
 			"isExam": null,
@@ -37,3 +37,6 @@
 	],
 	"isEnd": 2
 }
+
+[]中不能有{}，"":""     {}中可以有    []是list存储单  {}是 map
+
