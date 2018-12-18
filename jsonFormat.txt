@@ -1,0 +1,39 @@
+{
+	"userList": [
+
+		{
+			"addTime": "2018-12-17 13:35:16",
+			"courseContent": null,
+			"courseId": "d6b476d4eb9045ca9fff9c818e2e1003",
+			"courseName": "内科药物在产科的1应用           ",
+			"coursePoint": 1,
+			"id": "30a6d10c23a743529f63bae885617fdf",
+			"isExam": null,
+			"status": 4,
+			"userId": "6e282290ad03466e8994d585a482258a",
+			"usercourseMapper": null,
+			"videoAmount": 0,
+			"videoId": 0,
+			"videoListResult": null,
+			"year": 2018
+		},
+		{
+			"addTime": "2018-12-17 13:35:45",
+			"courseContent": null,
+			"courseId": "d6b476d4eb9045ca9fff9c818e2e1004",
+			"courseName": "妇产科科科药物在产科的6应用     ",
+			"coursePoint": 3,
+			"id": "597593d98a4d422daf5c296d02830064",
+			"isExam": null,
+			"status": 4,
+			"userId": "6e282290ad03466e8994d585a482258a",
+			"usercourseMapper": null,
+			"videoAmount": 0,
+			"videoId": 0,
+			"videoListResult": null,
+			"year": 2018
+		},
+		"isEsnd"
+	],
+	"isEnd": 2
+}
