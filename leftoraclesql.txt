@@ -1,1 +1,0 @@
-select  u.id,u.ADD_TIME,u.USER_ID,c.COURSE_POINT from  USER_COURSE  u left JOIN  COURSE  c on u.COURSE_ID=c.id     where ROWNUM<=3     and u.USER_ID='6e282290ad03466e8994d585a482258s'      ORDER BY ADD_TIME desc
