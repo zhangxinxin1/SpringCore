@@ -1,0 +1,1 @@
+select * from (select  u.id,u.ADD_TIME,u.USER_ID,c.COURSE_POINT from  USER_COURSE  u left JOIN  COURSE  c on u.COURSE_ID=c.id   order by u.ADD_TIME desc)  where      ROWNUM<=3  and USER_ID='6e282290ad03466e8994d585a482258a'  
