@@ -1,0 +1,13 @@
+$("#save_").click(function(){
+		var inputs = $("input");
+		var json = [];
+		var row = {};
+		for(var i=0; i<inputs.length; i++){
+			row.id = inputs.eq(i).attr("id");
+			row.value = inputs.eq(i).val();
+			json.push(row);
+			row = {};
+		}
+		var jsonStr = JSON.stringify(json);
+		alert(jsonStr);
+});
