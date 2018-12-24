@@ -1,0 +1,3 @@
+js 中  append中绑定事件有时  <img  sic="" id="del">不生效
+
+修改 ->    <img  sic="" onclick="del()">生效
