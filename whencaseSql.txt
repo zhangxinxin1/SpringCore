@@ -1,10 +1,12 @@
+ 
+ 
  "select",
             "p.ID, p.EXAM_ID, p.EXAM_PAPER_NAME, p.DIFFICULT_LEVEL, p.MAX_POINTS, p.TOTAL_SCORES, p.BEGIN_TIME, ",
             "p.END_TIME, p.AUTH_TYPE, p.ADD_TIME, p.ADD_PERSON,(SELECT count(1) FROM CLERK_EXAM_QUESTION q WHERE p.ID = q.EXAM_PAPER_ID) AS QUESTION_NUM,",
-            "(CASE WHEN L.ID IS NULL THEN 2 ELSE 1 END) AS TESTED ",
-            "FROM CLERK_EXAM_PAPER p left join clerk_exam_log l on p.id = l.exam_paper_id and l.clerk_id=#{clerkId} ",
+         "(CASE WHEN L.ID IS NULL THEN 2 ELSE 1 END) AS TESTED ",
+          "FROM CLERK_EXAM_PAPER p left join clerk_exam_log l on p.id = l.exam_paper_id and l.clerk_id=#{clerkId} ",
             "WHERE p.EXAM_ID =#{examId,jdbcType=CHAR} "
-            + "Order By p.Begin_time asc"
+         + "Order By p.Begin_time asc"
             
             
             
