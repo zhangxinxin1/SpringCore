@@ -1,3 +1,17 @@
-js ÖÐ  appendÖÐ°ó¶¨ÊÂ¼þÓÐÊ±  <img  sic="" id="del">²»ÉúÐ§
+js ä¸­  appendä¸­ç»‘å®šäº‹ä»¶æœ‰æ—¶  <img  sic="" id="del">ä¸ç”Ÿæ•ˆ
 
-ÐÞ¸Ä ->    <img  sic="" onclick="del()">ÉúÐ§
+ä¿®æ”¹ ->    <img  sic="" onclick="del()">ç”Ÿæ•ˆ
+
+
+
+ $.each(res,function(key,item) {
+                                var courseName = item.split(",")[0];
+                                var point = item.split(",")[1];
+                                var courseId=item.split(",")[2];
+                                alert("key->"+key+"<>"+item+"<>"+courseName+"<>"+point+"<>"+courseId)
+                                li += '<li><img src="/images/xuefen_03.jpg" alt="">' +
+                                '<div class="content2_box">' +
+                                '<p id="fir">' + courseName + '</p>' +
+                                '<p>å­¦åˆ†:' + point + '</span></p>' +
+                                '</div> <input class="ckbox" type="checkbox"/><img src="/images/xuefen_03.jpg" alt="" style="hight:30px;width:30px;" onclick="del(\''+courseId+'\')"/></li>';
+                        });
