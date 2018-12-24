@@ -5,3 +5,8 @@
             "FROM CLERK_EXAM_PAPER p left join clerk_exam_log l on p.id = l.exam_paper_id and l.clerk_id=#{clerkId} ",
             "WHERE p.EXAM_ID =#{examId,jdbcType=CHAR} "
             + "Order By p.Begin_time asc"
+            
+            
+            
+            
+SELECT u.*,p.* ,(CASE WHEN  p.POINT  iS NULL THEN 2  ELSE 1 END) as Statusll      from USER_INFO  u left join  USER_POINT p on u.id=p.USER_ID and year='2018'
