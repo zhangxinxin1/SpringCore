@@ -1,5 +1,9 @@
  
  
+   select sss.* from  (SELECT u.*,p.POINT ,(CASE WHEN  p.POINT  iS NULL THEN 2  ELSE 1 END) as Statusls      from USER_INFO  u left join       USER_POINT p on u.id=p.USER_ID and year='2018')  sss where   sss.Statusls=1
+ 
+ 
+ 
  "select",
             "p.ID, p.EXAM_ID, p.EXAM_PAPER_NAME, p.DIFFICULT_LEVEL, p.MAX_POINTS, p.TOTAL_SCORES, p.BEGIN_TIME, ",
             "p.END_TIME, p.AUTH_TYPE, p.ADD_TIME, p.ADD_PERSON,(SELECT count(1) FROM CLERK_EXAM_QUESTION q WHERE p.ID = q.EXAM_PAPER_ID) AS QUESTION_NUM,",
