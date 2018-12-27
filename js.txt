@@ -15,3 +15,5 @@ js 中  append中绑定事件有时  <img  sic="" id="del">不生效
                                 '<p>学分:' + point + '</span></p>' +
                                 '</div> <input class="ckbox" type="checkbox"/><img src="/images/xuefen_03.jpg" alt="" style="hight:30px;width:30px;" onclick="del(\''+courseId+'\')"/></li>';
                         });
+                        
+$(":checkbox").prop("disabled",true);
