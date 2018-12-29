@@ -17,3 +17,6 @@ js 中  append中绑定事件有时  <img  sic="" id="del">不生效
                         });
                         
 $(":checkbox").prop("disabled",true);
+
+
+.click(function(){})不生效，使用 onclick=xxx()
