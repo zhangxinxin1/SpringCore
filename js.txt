@@ -20,3 +20,6 @@ $(":checkbox").prop("disabled",true);
 
 
 .click(function(){})不生效，使用 onclick=xxx()
+
+js报错 is not a function   变量和函数同名
+
