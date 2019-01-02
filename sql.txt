@@ -55,4 +55,8 @@ select * from T1 where exists(select 1 from T2 where T1.a=T2.a) ;
  
  break 跳出  flag 标记全累加状态
  
+ select * from COURSE c left join USER_COURSE u on 
+c.id = u.course_id and u.USER_ID='363efe09fac34ee59ce31cfe54270245' and u.year< '2019'   and  c.IS_ACTIVE=1
+where u.id is null
+ 
  
