@@ -60,3 +60,12 @@ c.id = u.course_id and u.USER_ID='363efe09fac34ee59ce31cfe54270245' and u.year< 
 where u.id is null
  
  
+ 
+ 
+select ID,USER_ID,COURSE_ID,COURSE_NAME,YEAR,STATUS,ADD_TIME,COURSE_POINT,COURSE_PIC_URL from  (select *  from (SELECT  coursetmp.*,t.course_id as course_id_right,t.LAST_WATCH_TIME
+as LAST_WATCH_TIME  FROM(SELECT u.ID, u.USER_ID, u.COURSE_ID as COURSE_ID, u.COURSE_NAME, u.YEAR, u.STATUS,u.ADD_TIME,c.COURSE_POINT,c.COURSE_PIC_URL
+from USER_COURSE u left join COURSE c on u.COURSE_ID=c.ID   where u.user_id='363efe09fac34ee59ce31cfe54270245' AND  YEAR=2019)coursetmp   left  join  (select * from   (select v.course_id,
+max(l.LAST_WATCH_TIME) AS LAST_WATCH_TIME from video v inner join USER_VIDEO_LOG l  on v.id=l.VIDEO_ID   group by  v.course_id) ) t  on t.COURSE_ID=coursetmp.COURSE_ID  ) alltmp order by
+case when alltmp.LAST_WATCH_TIME  is null then 0 else 1  end   desc, alltmp.LAST_WATCH_TIME desc,alltmp.ADD_TIME desc) where ROWNUM<=3
+
+ 
