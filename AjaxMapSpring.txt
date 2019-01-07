@@ -1,0 +1,38 @@
+ var  map={id:"yyyyyyyyy","sy":"yn","sf":68};
+    console.log("<s>"+JSON.stringify(map)+"<>"+typeof map);
+    $.ajax({
+        type: "POST",
+        url: "/courses/sendData",
+        contentType: "application/json;charset=UTF-8",
+        dataType: "json",
+        data:JSON.stringify(map),
+        success: function (message) {
+            if(message.code=="200") {
+                console.log("resSend->"+message+"type->"+typeof message+"<>")
+
+            }else{
+                alert("")
+            }
+        }, error: function () {
+            alert("")
+        }
+
+    });
+
+
+
+ @RequestMapping(value = "/courses/sendData", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public ResultData<Object> send(@RequestBody Map<String,String> map) {
+        String id = map.get("id");
+        String sf = map.get("sf");
+        String sy = map.get("sy");
+        System.out.println("res--->"+id);
+        System.out.println("<sf>"+sf);
+        System.out.println("<sy>"+sy);
+        Map  res=new HashMap<String,String>();
+        res.put("s","s");
+
+
+        return success(res);
+
+    }
