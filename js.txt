@@ -23,3 +23,40 @@ $(":checkbox").prop("disabled",true);
 
 js报错 is not a function   变量和函数同名
 
+
+<script>
+
+function strChMap(str){
+    let ojs={};
+     for(var   [k,v]  of   str){
+         ojs[k]=v;
+     }
+    return ojs;
+}
+   var m=new Map();
+   m.set('aaa','sss');
+   m.set("yyy","yyh");
+   m.set("sy","sfs");
+   var res= strChMap(m);
+    $.ajax({
+        type: "POST",
+        url: "/courses/sendData",
+        contentType: "application/json;charset=UTF-8",
+        dataType: "json",
+        data:JSON.stringify(res),
+        success: function (message) {
+            if(message.code=="200") {
+                $.each(message.data, function (key, item) {
+                    var courseId=item.courseId;
+                    $("#"+courseId).prop("checked",true);
+                });
+            }else{
+                alert("购物车数据获取失败，请联系系统管理员")
+            }
+        }, error: function () {
+            alert("购物车数据获取失败，请联系系统管理员")
+        }
+
+    });
+</script>
+
