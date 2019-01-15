@@ -60,3 +60,5 @@ function strChMap(str){
     });
 </script>
 
+
+ajax  顺序执行  
