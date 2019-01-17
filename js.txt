@@ -62,3 +62,48 @@ function strChMap(str){
 
 
 ajax  顺序执行  
+
+
+
+<script>
+
+    var reb={};
+    reb['id']="qqq";
+    alert("<>"+JSON.stringify(reb))
+
+    var  arr=[1,6,'hhhhhhh'];
+    var da="da";
+    for(var i=0;i<arr.length;i++){
+        if(i==0){
+            reb['year']=arr[i];
+        }else if(i==1){
+            reb["mon"]=arr[i];
+        }else{
+            reb[da]=arr[i];
+        }
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "${path}/courses/sendData",
+        contentType: "application/json;charset=UTF-8",
+        dataType: "json",
+        data:JSON.stringify(reb),
+        async:false,
+        success: function (message) {
+            if(message.code=="200") {
+
+            }else{
+                alert_message("购物车数据获取失败，请联系系统管理员",'<span style="color: red">警告！</span>');
+            }
+            $(".dw").text($(".clearBtn").length);
+        }, error: function () {
+            alert_message("购物车数据获取失败，请联系系统管理员",'<span style="color: red">警告！</span>');
+
+        }
+    });
+
+</script>
+
+
+
