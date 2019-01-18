@@ -96,5 +96,19 @@
     }
 
 
+ public static void main(String[] args){
+        int arr[]={2,1,6,68,20,68};
+        int s=0,m=0;
+        for (int i=0;i<arr.length;i++){
+            if(arr[i]>m){
+              s=m;
+              m=arr[i];
 
+            }else if(arr[i]>s&& arr[i]!=m){
+                s=arr[i];
+            }
+        }
+        System.out.println("s>"+s+"<>"+m);
+
+    }
 
