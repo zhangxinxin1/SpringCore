@@ -61,7 +61,7 @@ function strChMap(str){
 </script>
 
 
-ajax  顺序执行  
+  async:false   ajax  顺序执行  
 
 
 
