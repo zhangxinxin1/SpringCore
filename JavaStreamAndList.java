@@ -112,3 +112,375 @@
 
     }
 
+
+
+package com.knys.edusvc.webmanage.uservideo;
+
+public class SingleLinkedList {
+
+    /**
+     * 链表的头节点
+     */
+
+    private  Node head ;
+    private  int length = 0;
+    private int pos = 0;// 节点的位置
+    /**
+     * 获取链表的长度
+     */
+    public  int length(){
+        return length;
+    }
+    // 在任意位置插入节点 在index的后面插入
+    public void add(int index, int data) {
+        Node node = new Node(data);
+        Node current = head;
+        Node previous =  head;
+        while (pos != index) {
+            previous = current;
+            current = current.next;
+            pos++;
+        }
+        node.next = current;
+        previous.next = node;
+        pos = 0;
+    }
+
+
+    /**
+     * 尾插法增加结点操作
+     * @param data
+     */
+    public  void addLastNode(int data){
+        Node tNode = new Node(data);
+        if (head == null){
+            head = tNode;
+            length++;
+            return;
+        }
+        Node temp = head;
+        while (temp.next != null){
+            temp = temp.next;
+        }
+        temp.next = tNode;
+        length++;
+    }
+
+    /**
+     * 头插法增加结点的操作
+     * @param data
+     */
+    public  void addHeadNode(int data){
+        Node tNode = new Node(data);
+        if (head == null){
+            head = tNode;
+            length++;
+            return;
+        }
+        Node temp = head;
+        tNode.next = temp;
+        head = tNode;
+        length++;
+    }
+
+
+    /**
+     * 插入结点到链表的指定位置
+     * @param index
+     * @param data
+     */
+    public  void insertNodeByIndex(int index,int data){
+
+        //先判断指定位置是否合法
+        if (index < 1 || index > length+1){
+            try {
+                throw new MyException("指定位置不合法，插入结点失败");
+            } catch (MyException e) {
+                e.printStackTrace();
+            }
+        }
+        if (index == 1){
+            addHeadNode(data);
+            return;
+        }
+        if (index == length+1){
+            addLastNode(data);
+            return;
+        }
+
+        Node temp = head;
+        Node tNode = new Node(data);
+        int tlength = 1;
+        while (temp.next != null){
+            if (index == ++tlength){
+                //当前结点向后移动一位
+                tNode.next = temp.next;
+                temp.next = tNode;
+                length++;
+                return;
+            }
+            temp = temp.next;
+        }
+
+    }
+
+
+    /**
+     * 删除指定位置的结点
+     * @param index
+     */
+    public  void delNodeByIndex(int index){
+        //先判断指定索引合不合法
+        if (index < 1 || index > length){
+            try {
+                throw new MyException("指定位置参数不合法");
+            } catch (MyException e) {
+                e.printStackTrace();
+            }
+        }
+        Node temp = head;
+        int tlength = 1;
+        while (temp.next != null){
+            //如果到达了指定结点则进行删除
+            if (index == ++tlength){
+                temp.next = temp.next.next;
+                length--;
+                return;
+            }
+            temp = temp.next;
+        }
+    }
+
+    /**
+     * 删除链表重复结点
+     * @return
+     */
+    public boolean deleteRepeatNode(){
+        Node temp = head;
+        while (temp != null){
+            Node tNode = head;
+            while (tNode.next != temp && tNode.next != null){
+                if (tNode.next.data == temp.data){
+                    tNode.next = tNode.next.next;
+                }else {
+                    tNode = tNode.next;
+                }
+            }
+            temp = temp.next;
+        }
+        return true;
+    }
+
+    /**
+     * 遍历单链表，打印链表中的值
+     */
+    public  void printData(){
+        Node temp = head;
+        System.out.print(temp.data);
+        while (temp.next != null){
+            System.out.print(","+temp.next.data);
+            temp = temp.next;
+        }
+        System.out.println(",长度："+length());
+    }
+
+    /**
+     * 修改指定结点的值
+     * @param index
+     * @param data
+     */
+    public boolean updateNode(int index,int data){
+        //判断指定位置是否存在结点
+        if (index < 0 || index > length){
+            try {
+                throw new MyException("不存在该指定结点，修改值失败");
+            } catch (MyException e) {
+                e.printStackTrace();
+            }
+        }
+        Node temp = head;
+        int i=1;
+        while(index != i){
+            temp = temp.next;
+            i++;
+        }
+        temp.data = data;
+        return true;
+
+    }
+
+    /**
+     * 单链表的选择排序---正序
+     * 注意排序的只是data而不是结点本身,不要混淆！！
+     * @return
+     */
+    public boolean selectedSortNode(){
+
+        Node temp = head;
+
+        while (temp != null){
+            Node tNode = temp.next;
+            while (tNode != null){
+                //判断大小交换data
+                if (temp.data > tNode.data){
+                    int da = tNode.data;
+                    tNode.data = temp.data;
+                    temp.data = da;
+                }
+                tNode = tNode.next;
+            }
+            temp = temp.next;
+        }
+        return true;
+    }
+
+    /**
+     * 冒泡排序法排序----倒序
+     * @return
+     */
+    public boolean bubbleSortNode(){
+
+        Node temp = head;
+        int len_temp = 1;
+        while (temp != null){
+            Node tNode = temp.next;
+            int len_tNode = 1;
+            if (len_tNode++ < length-len_temp){
+                while (tNode != null){
+                    if (temp.data < tNode.data){
+                        int da = temp.data;
+                        temp.data = tNode.data;
+                        tNode.data = da;
+                    }
+                    tNode = tNode.next;
+                }
+            }
+            temp = temp.next;
+            len_temp++;
+        }
+
+        return true;
+    }
+
+
+    /**
+     * 反转排序，将第一个和倒数第一个位置交换，以此类推
+     * @return
+     */
+    public boolean reverseSortNode(){
+        Node temp = head;
+        for (int i = 1; i<=length/2; i++){
+            //找到倒数第i个结点
+            Node q = head;
+            int len = 1;
+            while (q != null && len != length-i+1){
+                len++;
+                q = q.next;
+            }
+            int da = q.data;
+            q.data = temp.data;
+            temp.data = da;
+            temp = temp.next;
+        }
+        return true;
+    }
+
+
+
+    public  boolean isEmpty(){
+        if (head == null){
+            return true;
+        }
+        return false;
+    }
+
+
+    public static void main(String[] args){
+        SingleLinkedList linkedList = new SingleLinkedList();
+        linkedList.addLastNode(5);
+        linkedList.addLastNode(21);
+        linkedList.addLastNode(22);
+        linkedList.addLastNode(9);
+        linkedList.addLastNode(7);
+        System.out.println(linkedList.length());
+        linkedList.printData();
+        System.out.println(linkedList.isEmpty());
+        linkedList.addHeadNode(78);
+        linkedList.addHeadNode(101);
+        System.out.println("*************************************");
+        linkedList.printData();
+        System.out.println(linkedList.isEmpty());
+        System.out.println("*************************************");
+        linkedList.insertNodeByIndex(8,222);
+        linkedList.printData();
+        System.out.println("*************************************");
+        linkedList.insertNodeByIndex(2,600);
+        linkedList.insertNodeByIndex(3,68);
+        linkedList.add(4,188);
+        linkedList.printData();
+        // linkedList.delNodeByIndex(10);
+        linkedList.updateNode(2,1000);
+        linkedList.selectedSortNode();
+        linkedList.printData();
+        linkedList.bubbleSortNode();
+        linkedList.printData();
+        linkedList.reverseSortNode();
+        linkedList.printData();
+        linkedList.addLastNode(22);
+        linkedList.printData();
+        linkedList.deleteRepeatNode();
+        linkedList.printData();
+    }
+
+}
+
+
+
+
+class MyException extends Exception{
+
+    private String errorMessage;
+
+    public MyException(String message) {
+        super(message);
+        this.errorMessage = message;
+    }
+
+    @Override
+    public String getMessage() {
+        return errorMessage;
+    }
+}
+
+
+class Node {
+
+    /**
+     * 包含两个属性一个是结点数据，和下一个结点的引用
+     */
+    public Node next;
+    public int data;
+
+    /**
+     * constructor
+     */
+    public Node(int data) {
+        this.data = data;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
