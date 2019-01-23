@@ -69,3 +69,5 @@ max(l.LAST_WATCH_TIME) AS LAST_WATCH_TIME from video v inner join USER_VIDEO_LOG
 case when alltmp.LAST_WATCH_TIME  is null then 0 else 1  end   desc, alltmp.LAST_WATCH_TIME desc,alltmp.ADD_TIME desc) where ROWNUM<=3
 
  
+ 
+ select  count(DECODE(IS_ACTIVE, 1,9))  as   isyes,count(DECODE(IS_ACTIVE, 2,68)) as   isnotyes from    course;
