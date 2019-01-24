@@ -66,7 +66,6 @@ function strChMap(str){
 
 
 <script>
-
     var reb={};
     reb['id']="qqq";
     alert("<>"+JSON.stringify(reb))
