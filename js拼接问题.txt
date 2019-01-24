@@ -1,0 +1,82 @@
+ 
+
+$('#myModal').modal('show')
+            var li = "";
+            $.ajax({
+                type: "GET",
+                url: "${path}/courses/getData",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                async:false,
+                success: function (message) {
+                    if(message.code=="200") {
+                        $.each(message.data, function (key, item) {
+                            var url = "${path}";
+                            var courseName = item.courseName;
+                            var point = item.coursePoint;
+                            var courseId=item.courseId;
+                            var pic=item.coursePicUrl
+                             li += '<li class=\"' + courseId + '\"><img class="xf1" src="'+pic+'" alt="">' +
+                                    '<div class="content2_box">' +
+                                    '<span style="font-weight: bold;font-size:16px" id="fir">' + courseName + '</span>' +'<br/>'+
+                                    '<span>学分:' + point + '</span>' +
+                                    '</div><img class="deleteCart" src="'+url+'static/images/del.png" alt="" style="hight:20px;width:20px;" onclick="del(\'' + courseId + '\')"/></li>';
+                        });
+
+
+
+
+
+
+
+
+
+
+
+$('#myModal').modal('show')
+            var li = "";
+            $.ajax({
+                type: "GET",
+                url: "${path}/courses/getData",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                async:false,
+                success: function (message) {
+                    if(message.code=="200") {
+                        $.each(message.data, function (key, item) {
+                            var url = "${path}";
+                            var courseName = item.courseName;
+                            var point = item.coursePoint;
+                            var courseId=item.courseId;
+                            var pic=item.coursePicUrl
+                            li += '<li class=\"' + courseId + '\"><img class="xf1" src='+"${str}/"+pic+' alt="">' +
+                                    '<div class="content2_box">' +
+                                    '<span style="font-weight: bold;font-size:16px" id="fir">' + courseName + '</span>' +'<br/>'+
+                                    '<span>学分:' + point + '</span>' +
+                                    '</div><img class="deleteCart" src="'+url+'static/images/del.png" alt="" style="hight:20px;width:20px;" onclick="del(\'' + courseId + '\')"/></li>';
+                        });
+                        var isFlag=isSupply();
+                        if(isFlag==1) {
+                            $("#btn_remove").removeClass("course_btn");
+                            $("#btn_remove").addClass("content1_right_right_btn");
+                        }else{
+                            $("#btn_remove").removeClass("content1_right_right_btn");
+                            $("#btn_remove").addClass("course_btn");
+                        }
+                    }else{
+                        alert_message("购物车数据获取失败，请联系系统管理员",'<span style="color: red">警告！</span>');
+                    }
+                    $("#ulCon").html('<ul class="content2_xk">'+li+'</ul>');
+                }, error: function () {
+                    alert_message("购物车数据获取失败，请联系系统管理员",'<span style="color: red">警告！</span>');
+                }
+
+            });
+
+
+
+
+
+
+
+
