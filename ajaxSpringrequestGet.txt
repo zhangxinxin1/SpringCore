@@ -1,0 +1,43 @@
+ 
+
+ $("#testaja").click(function(){
+        alert("asfs")
+
+       var res={username:"zs","sssyhnyy":"sssssssssssssyyyyyyyyy"};
+        $.ajax({
+            type: "GET",
+            url: "${path}/courses/sendData",
+            contentType: "application/json;charset=UTF-8",
+            traditiondal:true,
+            data:res,
+            success: function (message) {
+                if(message.code=="200") {
+
+                }
+            }, error: function () {
+                alert_message("购物车数据获取失败，请联系系统管理员",'<span style="color: red">警告！</span>');
+            }
+
+        });
+
+    });
+
+//获取目标学分和已选学分
+    @RequestMapping(value = "/courses/sendData",method = RequestMethod.GET)
+    @ResponseBody
+    public ResultData<Object> sendData(@RequestParam(value = "username") String username , @RequestParam(value = "sssyhnyy") String sssyhnyy){
+        try {
+            System.out.println("s---->"+username);
+            System.out.println("yyyyyy--->"+sssyhnyy);
+
+            return success();
+        }catch (Exception e){
+            e.printStackTrace();
+            return error();
+        }
+
+    }
+
+
+
+
