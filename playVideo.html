@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>视频播放</title>
+    <link rel="stylesheet" href="${path}/static/css/video-js.min.css">
+    <link href="//imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css" rel="stylesheet">
+    <link rel="stylesheet" href="${path}/static/css/playvideo.css?${.now?string["hhmmSSsss"]}">
+    <link rel="stylesheet" href="${path}/static/css/bootstrap.css">
+</head>
+<body>
+    <div class="header"><#include "header.html"></div>
+    <div style="height:30px"></div>
+    <div class="content">
+        <div class="content_left">
+                <!-- <video id="example_video_1" class="video-js vjs-big-play-centered" controls preload="none" width="870" height="490" data-setup="{}">
+                    <source src="static/images/75599146f51802f4f6e7607a3e84a468.mp4" type='video/mp4' />
+                </video> -->
+                <!-- <div id="example_video_1" style="width:100%; height:auto;"></div> -->
+                <video id="example_video_1" width="870" height="490" preload="auto" playsinline webkit-playsinline class="videoDiv"></video>
+
+        </div>
+        <div class="content_right">
+            <div class="content_right_li1">${courseName}</div>
+            <#if videoList??&&(videoList?size>0) >
+            <ul class="content_right_video">
+                 <#assign index=0>
+            <#list videoList as item >
+
+                    <#assign index=index+1>
+                    <#if item.videoName?? >
+                     <li id="video1" class="bgc" style="cursor: pointer" onclick="videoChange('${item.id}')"><img src="${path}/static/images/bofang.png" class="imgBgc${item.id}"  id="imgShow${item.videoStorageId}">第${index}讲：${item.videoName}</li>
+                   </#if>
+
+            </#list>
+            </ul>
+            </#if>
+        </div>
+
+
+    </div>
+    <div ><#include "footer.html"></div>
+</body>
+<script src="//imgcache.qq.com/open/qcloud/video/tcplayer/ie8/videojs-ie8.js"></script>
+<script src="${path}/static/js/video.min.js"></script>
+<script src="//imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js"></script>
+<script src="//imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js"></script>
+<script>
+    <#if eduStatus??&&eduStatus==3>
+    window.location.href='${path}/index';
+</#if>
+sessionStorage.setItem("video","videoPlayer");
+    //页面高亮显示
+    $("#indexLi").removeClass("active");
+    $("#myCourseLi").addClass("active");
+    $(".bgc").on("click", function () { //给标签添加事件
+        var index = $(this).index();  //获取当前a标签的个数
+        console.log($(this).siblings())
+        $(this).addClass("active").siblings().removeClass("active"); //a标签显示，同辈元素隐藏
+    })
+    $(".imgBgc"+"${videoId}").parent().addClass("active").siblings().removeClass("active");
+
+    <#--document.getElementById("example_video_1").currentTime="${userVideoLog.watchTime}";-->
+    //加载页面第一次调用
+    var isEnd=${userVideoLog.isEnd};
+    var videoId="${userVideoLog.videoId}";
+    var videoStorageId="${videoStorageId}";
+    var t="${t}";
+    var us="${us}";
+    var sign="${sign}";
+    var courseId="${courseId}";
+    var watchTime="${userVideoLog.watchTime}";
+    var videoDivId=$(".videoDiv").attr('id');
+    var lastWatchTime=0;
+    var changeFlag=0;
+    var tmpTime=0;
+    player = TCPlayer(videoDivId, { // player-container-id 为播放器容器ID，必须与html中一致
+        fileID:  videoStorageId, // 请传入需要播放的视频filID 必须
+        appID: "1253358966", // 请传入点播账号的ppID 必须
+        t:t,
+        us:us,
+        sign:sign,
+        autoplay: true, //是否自动播放
+        controls: true,
+        controlBar:{
+            playbackRateMenuButton:false
+        }
+    });
+    startPlayVideo();
+
+    function  startPlayVideo() {
+        // alert("<>"+isEnd+""+videoId+""+videoStorageId+""+courseId+""+watchTime)
+        console.log("<>"+isEnd+""+videoId+""+videoStorageId+""+courseId+"www"+watchTime)
+        player.currentTime(watchTime);
+        console.log("start_watch-->"+player.currentTime())
+        watchTime=player.currentTime();
+        player.on('timeupdate', playFunction);
+        //视频结束事件
+        watchTime=player.currentTime();
+        console.log("watchTtestImeend->"+watchTime)
+        if(isEnd==2) {
+            console.log("<first->"+isEnd)
+            player.on('ended', endFunction);
+        }
+    }
+
+    //为 <video> 元素添加 ontimeupdate 事件，如果当前播放位置改变则执行函数
+    function playFunction() {
+        console.log("playFunction-------------->")
+        watchTime=player.currentTime();
+       // var intWatchTime=parseInt(watchTime)
+        //上线后更改30
+
+            console.log("watchTime"+watchTime);
+            //alert("videId->"+videoId+"<>"+watchTime)
+             console.log("<terminal>"+watchTime+"<>"+lastWatchTime)
+             var minusTime=watchTime-lastWatchTime
+             console.log("<minusTime>"+minusTime+"<isEnd>"+isEnd)
+            console.log("isEndDebug--->"+isEnd)
+            if(watchTime>=tmpTime) {
+                if (minusTime > 2 && isEnd == 2 && lastWatchTime != 0) {
+                    console.log("lastWatchTimedebug->" + lastWatchTime + "<cu>" + watchTime)
+                    player.currentTime(lastWatchTime)
+                    return;
+                }
+            }
+            lastWatchTime=watchTime;
+            if(lastWatchTime>=tmpTime){
+                 tmpTime=lastWatchTime;
+            }
+            $.ajax({
+                type: "POST",
+                url: "/video/videoWatch",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                data:JSON.stringify([videoId,watchTime]),
+                success: function (message) {
+                    console.log("success----->")
+                }
+                , error: function (err) {
+                    //alert("视频播放失败，请联系系统管理员")
+                    console.log("----->"+err)
+                }
+            });
+
+
+    }
+
+    function endFunction() {
+        watchTime=player.currentTime();
+        $.ajax({
+            type: "POST",
+            url: "${path}/video/videoFinish",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            data:JSON.stringify([videoId,courseId,watchTime]),
+            success: function (message) {
+                isEnd=1;
+                console.log("isEndDebugsuccess--->"+isEnd)
+                //手动点击切换时终止
+                if(changeFlag==1){
+                    return false;
+                }
+                if(message.data==null){
+                    console.log("all end---->")
+                    // console.log("endsuccess----->"+message.data.watchTime+"<>"+message.data.isEnd+"<>"+message.data.videoStorageId)
+                    return false;
+                }
+                // alert("endsssss222221")
+                console.log("conConsole--->"+message.data.videoStorageId+"<>"+message.data.videoId)
+               // continuePlayVideo(message.data.isEnd,message.data.watchTime,message.data.videoStorageId,message.data.videoId)
+                //高亮切换
+                $("#imgShow"+message.data.videoStorageId).parent().addClass("active").siblings().removeClass("active");
+                videoId=message.data.videoId;
+                player.loadVideoByID({
+                 fileID: message.data.videoStorageId,
+                 appID: "1253358966",
+                 t:t,
+                 us:us,
+                 sign:sign
+
+              });
+
+            }
+            , error: function () {
+                alert("视频播放失败，请联系系统管理员")
+            }
+        });
+
+    }
+
+
+
+    //列表视频切换
+    function videoChange(changeVideoId){
+        changeFlag=1;
+        window.location.href="${path}/videoPlayer/"+changeVideoId+"&"+courseId
+        // player.loadVideoByID({
+        //     fileID: changeVideoStorageId,
+        //     appID: "1258278887"
+        //
+        // });
+
+    }
+
+
+</script>
+</html>
+
+
