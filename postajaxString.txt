@@ -1,0 +1,35 @@
+$.ajax({
+       type: "POST",
+       url: "/video/videoStatus",
+       contentType: "application/json;charset=UTF-8",
+       dataType: "json",
+       async:false,
+       data:JSON.stringify('sssssysss1'),
+       success: function (message) {
+           console.log("success----->"+message+"<>"+message.isEnd)
+       }
+       , error: function (err) {
+           console.log("----->"+err)
+       }
+   });
+
+
+
+
+ @RequestMapping(value = "/video/videoStatus", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public ResultData<Object> videoStatus(@RequestBody String videoId){
+        try {
+            // 获取当前subject
+            System.out.println("--vvvvvvvvvvv->"+videoId);
+            Subject currentUser = SecurityUtils.getSubject();
+            UserInfo user = (UserInfo) currentUser.getPrincipal();
+            //查询视频记录
+            UserVideoLog  videoLog= videoSvc.queryVideoLog(user.getId(),videoId);
+            Short isEnd = videoLog.getIsEnd();
+            return success(isEnd);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return error();
+        }
+
+    }
