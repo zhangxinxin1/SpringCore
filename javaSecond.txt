@@ -1,0 +1,45 @@
+/**
+ * 快速找出一个数组中的最大数、第二大数。
+ * @author CLY
+ *
+ */
+public class SearchBig {
+    public static void main(String[] args) {
+        int[] arr= {10,2,3,9,33,22,55,99,96};
+        getBig(arr);
+        getMin(arr);
+    }
+
+    //寻找数组最大和第二大的元素
+    public static void getBig(int[] arr) {
+
+        //big_1用来标记一个数组中的最大值
+        int big_1 = arr[0];
+        //big_2用来标记一个数组中的次大值
+        int big_2 =Integer.MIN_VALUE;
+        for(int i=1;i<arr.length;i++) {
+            if(arr[i]>big_1) {
+                big_2 = big_1;
+                big_1 = arr[i];
+
+            }else if(arr[i]>big_2 && arr[i]!=big_1){
+                big_2 = arr[i];
+            }
+        }
+        System.out.println("数组中最大的数是："+big_1+"第二大的数是："+big_2);
+    }
+
+    //寻找最小值
+    public static void getMin(int[] arr) {
+        int min = arr[0];
+        for(int i=1;i<arr.length;i++) {
+            if(arr[i]<min) {
+                min = arr[i];
+            }
+        }
+        System.out.println("该数组中最小的值为"+min);
+    }
+
+}
+
+      
