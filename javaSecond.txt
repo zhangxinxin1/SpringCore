@@ -13,6 +13,7 @@ public class SearchBig {
     //寻找数组最大和第二大的元素
     public static void getBig(int[] arr) {
 
+       
         //big_1用来标记一个数组中的最大值
         int big_1 = arr[0];
         //big_2用来标记一个数组中的次大值
