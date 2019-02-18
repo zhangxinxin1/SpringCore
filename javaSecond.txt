@@ -1,5 +1,5 @@
 /**
- * ¿ìËÙÕÒ³öÒ»¸öÊı×éÖĞµÄ×î´óÊı¡¢µÚ¶ş´óÊı¡£
+ * å¿«é€Ÿæ‰¾å‡ºä¸€ä¸ªæ•°ç»„ä¸­çš„æœ€å¤§æ•°ã€ç¬¬äºŒå¤§æ•°ã€‚
  * @author CLY
  *
  */
@@ -10,12 +10,12 @@ public class SearchBig {
         getMin(arr);
     }
 
-    //Ñ°ÕÒÊı×é×î´óºÍµÚ¶ş´óµÄÔªËØ
+    //å¯»æ‰¾æ•°ç»„æœ€å¤§å’Œç¬¬äºŒå¤§çš„å…ƒç´ 
     public static void getBig(int[] arr) {
 
-        //big_1ÓÃÀ´±ê¼ÇÒ»¸öÊı×éÖĞµÄ×î´óÖµ
+        //big_1ç”¨æ¥æ ‡è®°ä¸€ä¸ªæ•°ç»„ä¸­çš„æœ€å¤§å€¼
         int big_1 = arr[0];
-        //big_2ÓÃÀ´±ê¼ÇÒ»¸öÊı×éÖĞµÄ´Î´óÖµ
+        //big_2ç”¨æ¥æ ‡è®°ä¸€ä¸ªæ•°ç»„ä¸­çš„æ¬¡å¤§å€¼
         int big_2 =Integer.MIN_VALUE;
         for(int i=1;i<arr.length;i++) {
             if(arr[i]>big_1) {
@@ -26,10 +26,10 @@ public class SearchBig {
                 big_2 = arr[i];
             }
         }
-        System.out.println("Êı×éÖĞ×î´óµÄÊıÊÇ£º"+big_1+"µÚ¶ş´óµÄÊıÊÇ£º"+big_2);
+        System.out.println("æ•°ç»„ä¸­æœ€å¤§çš„æ•°æ˜¯ï¼š"+big_1+"ç¬¬äºŒå¤§çš„æ•°æ˜¯ï¼š"+big_2);
     }
 
-    //Ñ°ÕÒ×îĞ¡Öµ
+    //å¯»æ‰¾æœ€å°å€¼
     public static void getMin(int[] arr) {
         int min = arr[0];
         for(int i=1;i<arr.length;i++) {
@@ -37,9 +37,11 @@ public class SearchBig {
                 min = arr[i];
             }
         }
-        System.out.println("¸ÃÊı×éÖĞ×îĞ¡µÄÖµÎª"+min);
+        System.out.println("è¯¥æ•°ç»„ä¸­æœ€å°çš„å€¼ä¸º"+min);
     }
 
 }
 
+
+javaä¸­ equals   "AAAA".equals(a)  å’Œ a.equals("AAA")æ˜¯ä¸åŒçš„ã€‚å› ä¸ºaä¸ºnullæ—¶ï¼Œç¬¬äºŒä¸ªä¼šæŠ¥é”™
       
