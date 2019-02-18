@@ -97,18 +97,20 @@
 
 
  public static void main(String[] args){
-        int arr[]={2,1,6,68,20,68};
-        int s=0,m=0;
-        for (int i=0;i<arr.length;i++){
-            if(arr[i]>m){
-              s=m;
-              m=arr[i];
+       //big_1用来标记一个数组中的最大值
+        int big_1 = arr[0];
+        //big_2用来标记一个数组中的次大值
+        int big_2 =Integer.MIN_VALUE;
+        for(int i=1;i<arr.length;i++) {
+            if(arr[i]>big_1) {
+                big_2 = big_1;
+                big_1 = arr[i];
 
-            }else if(arr[i]>s&& arr[i]!=m){
-                s=arr[i];
+            }else if(arr[i]>big_2 && arr[i]!=big_1){
+                big_2 = arr[i];
             }
         }
-        System.out.println("s>"+s+"<>"+m);
+        System.out.println("数组中最大的数是："+big_1+"第二大的数是："+big_2);
 
     }
 
