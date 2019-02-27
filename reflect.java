@@ -1,5 +1,4 @@
-public class t {  
-    public static void main(String[] args){  
+     public static void main(String[] args){  
         Dto d = new Dto();  
         d.setUserName("LRR");  
         d.setPassword("123");  
@@ -26,3 +25,4 @@ public class t {
             // TODO Auto-generated catch block  
             e.printStackTrace();  
         }  
+     }
