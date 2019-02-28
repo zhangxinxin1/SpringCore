@@ -59,7 +59,9 @@ select * from T1 where exists(select 1 from T2 where T1.a=T2.a) ;
 c.id = u.course_id and u.USER_ID='363efe09fac34ee59ce31cfe54270245' and u.year< '2019'   and  c.IS_ACTIVE=1
 where u.id is null
  
- 
+ select   MAX(DISCOUNT_AMOUNT) AS DISCOUNT_AMOUNT   from DRUG_STORE_SALES_RULE_DETAIL d  where d.RULE_ID IN(SELECT r.ID FROM DRUG_STORE_SALES_RULE r
+            where r.DRUG_STORE_ID=#{drugStoreId} AND r.IS_ACTIVE='1' AND SYSDATE >= r.BEGIN_DATE AND SYSDATE <r.END_DATE)
+            AND #{totalprice}>=TOTAL_AMOUNT AND IS_ACTIVE='1'
  
  
 select ID,USER_ID,COURSE_ID,COURSE_NAME,YEAR,STATUS,ADD_TIME,COURSE_POINT,COURSE_PIC_URL from  (select *  from (SELECT  coursetmp.*,t.course_id as course_id_right,t.LAST_WATCH_TIME
