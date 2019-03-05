@@ -71,5 +71,125 @@ max(l.LAST_WATCH_TIME) AS LAST_WATCH_TIME from video v inner join USER_VIDEO_LOG
 case when alltmp.LAST_WATCH_TIME  is null then 0 else 1  end   desc, alltmp.LAST_WATCH_TIME desc,alltmp.ADD_TIME desc) where ROWNUM<=3
 
  
+ SELECT
+	user_info_tmp.*,
+	r.REWARD_MONEY,
+	r.USER_COURSE_ID 
+FROM
+	(
+SELECT
+	ID,
+	USER_ID,
+	COURSE_ID,
+	COURSE_NAME,
+	YEAR,
+	STATUS,
+	ADD_TIME,
+	COURSE_POINT,
+	COURSE_PIC_URL,
+	COURSE_CONTENT 
+FROM
+	(
+SELECT
+	* 
+FROM
+	(
+SELECT
+	coursetmp.*,
+	t.course_id AS course_id_right,
+	t.LAST_WATCH_TIME AS LAST_WATCH_TIME 
+FROM
+	(
+SELECT
+	u.ID,
+	u.USER_ID,
+	u.COURSE_ID AS COURSE_ID,
+	u.COURSE_NAME,
+	u.YEAR,
+	u.STATUS,
+	u.ADD_TIME,
+	c.COURSE_POINT,
+	c.COURSE_PIC_URL,
+	c.COURSE_CONTENT 
+FROM
+	USER_COURSE u
+	LEFT JOIN COURSE c ON u.COURSE_ID = c.ID 
+WHERE
+	u.user_id = '60e23812fgce458f845671913ba1893h' 
+	AND YEAR = 2019 
+	AND ( u.STATUS = '1' OR u.STATUS = '2' OR u.STATUS = '4' )) coursetmp
+	LEFT JOIN (
+SELECT
+	* 
+FROM
+	(
+SELECT
+	v.course_id,
+	max( l.LAST_WATCH_TIME ) AS LAST_WATCH_TIME 
+FROM
+	video v
+	INNER JOIN USER_VIDEO_LOG l ON v.id = l.VIDEO_ID 
+GROUP BY
+	v.course_id 
+	) 
+	) t ON t.COURSE_ID = coursetmp.COURSE_ID 
+	) alltmp 
+ORDER BY
+CASE
+	
+	WHEN alltmp.LAST_WATCH_TIME IS NULL THEN
+	0 ELSE 1 
+	END DESC,
+	alltmp.LAST_WATCH_TIME DESC,
+	alltmp.ADD_TIME DESC 
+	) UNION ALL
+SELECT
+	* 
+FROM
+	(
+	SELECT
+		u.ID,
+		USER_ID,
+		u.COURSE_ID,
+		u.COURSE_NAME,
+		u.YEAR,
+		u.STATUS,
+		u.ADD_TIME,
+		c.COURSE_POINT,
+		c.COURSE_PIC_URL,
+		c.COURSE_CONTENT 
+	FROM
+		USER_COURSE u
+		LEFT JOIN COURSE c ON u.COURSE_ID = c.ID 
+	WHERE
+		u.USER_ID = '60e23812fgce458f845671913ba1893h' 
+		AND u.STATUS = '3' 
+		AND u.YEAR = 2019 
+	ORDER BY
+		u.ADD_TIME DESC 
+	)) user_info_tmp
+	LEFT JOIN USER_COURSE_REWARD r ON user_info_tmp.COURSE_ID = r.USER_COURSE_ID 
+ORDER BY
+CASE
+		
+		WHEN user_info_tmp.STATUS = 3 THEN
+		0 ELSE 1 
+	END DESC,
+user_info_tmp.ADD_TIME DESC
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 
