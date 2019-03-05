@@ -7,6 +7,19 @@
 另外，最清晰的方法就是查看执行计划，因为有可能涉及优化器的优化
 
 
+
+@Select({
+			"SELECT  user_info_tmp.*,r.REWARD_MONEY,r.USER_COURSE_ID from (select ID,USER_ID,COURSE_ID,COURSE_NAME,YEAR,STATUS,ADD_TIME,COURSE_POINT,COURSE_PIC_URL,COURSE_CONTENT from  (select *  from (SELECT  coursetmp.*,t.course_id as course_id_right,t.LAST_WATCH_TIME " ,
+					"as LAST_WATCH_TIME  FROM(SELECT u.ID, u.USER_ID, u.COURSE_ID as COURSE_ID, u.COURSE_NAME, u.YEAR, u.STATUS,u.ADD_TIME,c.COURSE_POINT,c.COURSE_PIC_URL,c.COURSE_CONTENT " ,
+					"from USER_COURSE u left join COURSE c on u.COURSE_ID=c.ID   where u.user_id=#{userId} AND  YEAR=#{time} AND (u.STATUS='1'OR u.STATUS='2' OR u.STATUS='4')) coursetmp   left  join  (select * from   (select v.course_id, " ,
+					"max(l.LAST_WATCH_TIME) AS LAST_WATCH_TIME from video v inner join USER_VIDEO_LOG l  on v.id=l.VIDEO_ID   group by  v.course_id) ) t  on t.COURSE_ID=coursetmp.COURSE_ID  ) alltmp order by " ,
+					"case when alltmp.LAST_WATCH_TIME  is null then 0 else 1  end   desc, alltmp.LAST_WATCH_TIME desc,alltmp.ADD_TIME desc)   UNION  ALL  SELECT * FROM ( SELECT u.ID,USER_ID,u.COURSE_ID,u.COURSE_NAME,u.YEAR,u.STATUS,u.ADD_TIME,c.COURSE_POINT,c.COURSE_PIC_URL,c.COURSE_CONTENT ",
+			"from USER_COURSE u left join  COURSE c on u.COURSE_ID=c.ID WHERE u.USER_ID=#{userId}   AND u.STATUS='3'  AND  u.YEAR=#{time} ORDER BY u.ADD_TIME DESC)) user_info_tmp    left join USER_COURSE_REWARD  r on   user_info_tmp.COURSE_ID=r.USER_COURSE_ID ORDER BY CASE WHEN user_info_tmp.STATUS=3 THEN 0 ELSE 1  END DESC,user_info_tmp.ADD_TIME DESC"
+	})
+
+
+
+
  select p.* ,（select count(ID) FROM CLERK_EXAM_QUESTION  where EXAM_PAPER_ID=p.ID) as examcount   from CLERK_EXAM_PAPER  p ;
 
 
