@@ -37,7 +37,7 @@ select * from T1 where exists(select 1 from T2 where T1.a=T2.a) ;
  select * from T1 where T1.a in (select T2.a from T2) ;
  
  
- 
+  select  count(DECODE(IS_ACTIVE, 1,9))  as   isyes,count(DECODE(IS_ACTIVE, 2,68)) as   isnotyes from    course;
  
  
  
@@ -72,4 +72,4 @@ case when alltmp.LAST_WATCH_TIME  is null then 0 else 1  end   desc, alltmp.LAST
 
  
  
- select  count(DECODE(IS_ACTIVE, 1,9))  as   isyes,count(DECODE(IS_ACTIVE, 2,68)) as   isnotyes from    course;
+
