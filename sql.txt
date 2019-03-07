@@ -42,6 +42,29 @@ select * from T1 where exists(select 1 from T2 where T1.a=T2.a) ;
  
  
  
+ 
+ Short year = Short.parseShort(DateUtils.formatdd(new Date()).split("-")[0]);
+ SQL sql = new SQL();
+ sql.SELECT("u.ID,u.TRUE_NAME, u.IDCARD_NO,u.WX_OPENID,u.WX_UNIONID,u.USER_PASSWORD,u.IS_ACTIVE,u.QRCODE_URL,u.CERT_NO,u.BALANCE");
+ sql.SELECT("u.ADD_CHANNEL,u.ADD_TIME,c.point,c.IS_PASSED");
+ sql.FROM("USER_INFO u");
+ sql.LEFT_OUTER_JOIN("USER_POINT c ON c.USER_ID= u.ID AND  YEAR="+year);
+ if(!StringUtils.isEmpty(trueName)){
+     sql.WHERE("u.TRUE_NAME LIKE '%"+trueName+"%'");
+ }
+ if(!StringUtils.isEmpty(idcardNo)){
+	  sql.WHERE("u.IDCARD_NO LIKE'%"+idcardNo+"%'");
+ }
+ if(!StringUtils.isEmpty(status)) {
+     if (status == 2) {
+	 sql.WHERE("c.point is null");
+     }
+     if (status == 1) {
+	 sql.WHERE("c.point is not null");
+     }
+ }
+ sql.ORDER_BY("u.ADD_TIME DESC");
+ 
  select rownum  rn, * from  (SELECT     *
            
             FROM QUESTION_CATEGORY c
