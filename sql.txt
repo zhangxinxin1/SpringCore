@@ -33,7 +33,7 @@ WHERE
 select * from T1 where exists(select 1 from T2 where T1.a=T2.a) ;
 
     T1数据量小而T2数据量非常大时，T1<<T2 时，1) 的查询效率高。
-如果sql查询多重复数据，检查外键关联条件是否缺少？ u.couseid=t.id  缺  u.userid=t.id
+如果sql查询多重复数据，检查外键关联条件是否缺少？ u.couseid=t.id  缺  u.userid=t.userid
 
  select * from T1 where T1.a in (select T2.a from T2) ;
  
