@@ -1,4 +1,5 @@
-  @Override
+ if(list !=null && list.size>0){};
+@Override
     public List<SysRights> getPageAdminRightsList(String rightsId, SysAdminDomain sysAdmin){
         if (sysAdmin.getAdminName().equals("haojunjie")){
             List<SysRights> sysRights = sysRightsDomain.selectAllRightsList(null);
