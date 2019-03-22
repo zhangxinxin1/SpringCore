@@ -203,7 +203,34 @@ CASE
  
  
  
- 
+   StringBuffer sql = new StringBuffer();
+        sql.append("select c.ID, c.QUESTION_ID, c.QUESTION_NAME, c.QUESTION_DESC, c.QUESTION_TYPE, ");
+        sql.append(" c.AUTH_TYPE, ds.DRUG_STORE_NAME, hq.DRUG_STORE_HQ_NAME,c.POINTS,l.ID AS IS_READ");
+        sql.append(" from CLERK_DAY_QUESTION c "
+        		+ "left join DRUG_STORE ds on c.DRUG_STORE_ID=ds.ID and ds.drug_store_status=1 ");
+        sql.append(" left join DRUG_STORE_HQ hq on c.DRUG_STORE_HQ_ID = hq.ID and hq.drug_store_hq_status=1 ");
+        sql.append(" LEFT JOIN CLERK_DAY_QUESTION_LOG l ON l.DAY_QUESTION_ID = c.ID  AND l.CLERK_ID='"+ clerkId +"' ");
+        sql.append(" where TO_CHAR(c.QUESTION_DATE,'YYYY-MM-DD')= '"+questionDate+"' ");
+//        if (!StringUtils.isEmpty(clerkId)){
+//            sql.append(" AND ( ds.ID IN ( SELECT DRUG_STORE_ID FROM CLERK_DRUG_STORE_REL WHERE CLERK_ID = '"+ clerkId +"')");
+//            sql.append(" OR c.AUTH_TYPE=" + StatusEnum.AUTH_HYS.getCode());
+//           sql.append(" AND hq.ID IN (SELECT DRUG_STORE_HQ_ID FROM DRUG_STORE WHERE ID IN ( SELECT DRUG_STORE_ID FROM CLERK_DRUG_STORE_REL WHERE CLERK_ID = '"+clerkId+"'))) ");
+//        }
+//        else{
+//        	sql.append(" and c.AUTH_TYPE=" + StatusEnum.AUTH_HYS.getCode());
+//        }
+
+        if(!StringUtils.isEmpty(clerkId)){
+            sql.append(" AND (ds.ID IN ( SELECT DRUG_STORE_ID FROM CLERK_DRUG_STORE_REL WHERE CLERK_ID='"+clerkId+"')  OR ");
+            sql.append("hq.ID IN( select drug_store_hq_id from drug_store where id in(SELECT DRUG_STORE_ID FROM CLERK_DRUG_STORE_REL WHERE CLERK_ID='"+clerkId+"') ) OR ");
+            sql.append("c.AUTH_TYPE=1) ");
+        }
+        if(StringUtils.isEmpty(clerkId)){
+            sql.append(" AND c.AUTH_TYPE=1 ");
+        }
+        sql.append(" ORDER BY c.AUTH_TYPE DESC,c.add_time desc");
+       // System.out.println("<debugsql---------------------------->"+sql);
+        return sql.toString();
  
  
  
