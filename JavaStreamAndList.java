@@ -476,6 +476,46 @@ class Node {
 
 
 
+ static int r=0;
+    static int ord(int n){
+        if(n<10){
+            System.out.println("<>"+n);
+            r=r*10+n;
+
+            return r;
+        }
+        r=r*10+(n%10);
+        ord(n/10);
+        System.out.println("<qqq>"+r);
+        return r;
+
+    }
+
+    public static void main(String[] args){
+        int ord = ord(2430007);
+        System.out.println("<>"+ord);
+
+        int res=0;
+        int n=907;
+        while (n!=0){
+            res=(res*10)+(n%10);
+            n=n/10;
+        }
+        System.out.println("<res------->"+res);
+
+        int qqq=3234232;
+        int k=0;
+        while (qqq>0){
+            k++;
+            qqq=qqq/10;
+            System.out.println("<outqq>"+qqq);
+        }
+        System.out.println("<out>"+k);
+
+    }
+
+
+
 
 
 
