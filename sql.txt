@@ -19,7 +19,7 @@ where id=o.drug_store_id and   drug_store_hq_id ='85a6bb3194fe4c14b3015ce958746e
 85a6bb3194fe4c14b3015ce958746edd
 
 
-sqll  group  by  时   group  by  后 列和查询列数注意对起来
+sql  group  by  时   group  by  后 列和查询列数注意对起来
 
 SELECT
 	* 
