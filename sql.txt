@@ -7,6 +7,14 @@
 另外，最清晰的方法就是查看执行计划，因为有可能涉及优化器的优化
 
 
+
+SELECT
+	* 
+FROM
+	( SELECT * FROM ( SELECT DISTINCT ( APPROVAL_NUMBER ) FROM GOODS_INFO ORDER BY dbms_random.random ) WHERE ROWNUM < 3 ) r
+	inner JOIN GOODS_INFO l ON l.APPROVAL_NUMBER = r.APPROVAL_NUMBER   
+
+
  select p.* ,（select count(ID) FROM CLERK_EXAM_QUESTION  where EXAM_PAPER_ID=p.ID) as examcount   from CLERK_EXAM_PAPER  p ;
 
 
