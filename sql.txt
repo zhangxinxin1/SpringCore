@@ -242,6 +242,15 @@ CASE
  
  
  
+ SELECT
+	r.*,l.*
+FROM
+	( SELECT * FROM ( SELECT DISTINCT ( APPROVAL_NUMBER ) FROM  (select * from  GOODS_INFO where STAUTS=1)     ORDER BY dbms_random.random ) WHERE ROWNUM < 3 ) r  
+	
+	
+	inner JOIN GOODS_INFO l ON l.APPROVAL_NUMBER = r.APPROVAL_NUMBER    WHERE     l.STAUTS=1
+ 
+ 
  
  
  
