@@ -249,6 +249,17 @@ FROM
 	
 	
 	inner JOIN GOODS_INFO l ON l.APPROVAL_NUMBER = r.APPROVAL_NUMBER    WHERE     l.STAUTS=1
+	
+	
+	
+	
+	@Select({"SELECT j.ID,j.USER_INFO_ID,j.GOODS_ID,j.GOODS_NAME,j.SPECIFICATIONS,j.FACTORY_NAME,j.STATUS,j.APPROVAL_NUMBER,j.DOSAGEFORM_ID,j.UNIT_ID,j.PACKAGING_SPECIFICATION," ,
+          "u.USER_NAME,i.UNIT_NAME,j.PACKAGING_SPECIFICATION FROM GOODS_INFO_JOB j LEFT JOIN USER_INFO u ON j.USER_INFO_ID = u.ID" ,
+          "LEFT JOIN GOODS_UNIT  i ON j.UNIT_ID=i.ID",
+          "WHERE (u.AUDITOR_ID =#{userId}) AND (j.STATUS=#{status}) AND ( j.GOODS_NAME LIKE '%${drugContent}%'OR  j.APPROVAL_NUMBER = '${drugContent}' )",
+          })
+  //@ResultMap("goodsInfoJobByAuditor")
+  List<GoodsInfoJobDomain> selectGoodsInfoJobByAuditorId(@Param("userId")String userId,@Param("drugContent")String drugContent, @Param("status")Short status);
  
  
  
