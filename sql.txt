@@ -263,6 +263,25 @@ FROM
  
  
  
+  @Insert({
+      "<script>",
+      "insert into GOODS_INFO_JOB",
+      "(ID,GOODS_ID,GOODS_NAME,WARE_NAME,BAR_CODE,SPECIFICATIONS,APPROVAL_NUMBER,STANDARD_CODE,FACTORY_NAME,UNIT_ID,",
+      "UNIT_NAME,DOSAGEFORM_ID,DOSAGEFORM_NAME,PACKAGING_SPECIFICATION,ORDER_INDEX,USER_INFO_ID,AUDITOR_ID,AUDITOR_NAME,STATUS,IS_ADDED,ADD_TIME,GOODS_INFO_ID)",
+      "<foreach collection='goodsInfos' item='item' separator='union all'>",
+      "(select sys_guid(),#{item.goodsId},#{item.goodsName},#{item.wareName},#{item.barCode},#{item.specifications},#{item.approvalNumber},",
+      "#{item.standardCode},#{item.factoryName},#{item.unitId},#{item.unitName},#{item.dosageformId},#{item.dosageformName},#{item.packagingSpecification},",
+      "#{item.orderIndex},#{userId},#{auditorId},#{userName},'1','2',SYSTIMESTAMP,#{item.id}from DUAL)",
+      "</foreach>",
+      "</script>"
+  })
+  int addGoodsInfoJobs(@Param("goodsInfos") List<GoodsInfo> goodsInfos,
+      @Param("userId") String userId, @Param("auditorId") String auditorId,
+      @Param("userName") String userName);
+
+
+ 
+ 
  
  
  
