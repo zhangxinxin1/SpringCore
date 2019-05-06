@@ -49,7 +49,8 @@ select * from T1 where exists(select 1 from T2 where T1.a=T2.a) ;
   select  count(DECODE(IS_ACTIVE, 1,9))  as   isyes,count(DECODE(IS_ACTIVE, 2,68)) as   isnotyes from    course;
  
  
- 
+ SELECT r.*, (SELECT to_char(WMSYS.WM_CONCAT(rel.ID)) from SYS_FUNC_RIGHTS_REL rel WHERE rel.RIGHTS_ID = r.ID) AS relId 
+ FROM SYS_RIGHTS r
  
  
  Short year = Short.parseShort(DateUtils.formatdd(new Date()).split("-")[0]);
