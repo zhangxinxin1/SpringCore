@@ -52,6 +52,7 @@ select * from T1 where exists(select 1 from T2 where T1.a=T2.a) ;
  SELECT r.*, (SELECT to_char(WMSYS.WM_CONCAT(rel.ID)) from SYS_FUNC_RIGHTS_REL rel WHERE rel.RIGHTS_ID = r.ID) AS relId 
  FROM SYS_RIGHTS r
  
+ select cid, WMSYS.WM_CONCAT(distinct sage) from student group by cid;
  
  Short year = Short.parseShort(DateUtils.formatdd(new Date()).split("-")[0]);
  SQL sql = new SQL();
